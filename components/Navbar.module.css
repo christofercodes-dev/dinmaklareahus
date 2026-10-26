@@ -1,0 +1,428 @@
+
+.navbar {
+    --nav-bg: #747A73;
+    --nav-text: #fff;
+    --nav-muted: #85867e;
+    --nav-line: rgba(37, 39, 34, 0.15);
+    --nav-accent: #a18a65;
+  
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 1000;
+    width: 100%;
+    height: 65px;
+    color: var(--nav-text);
+    background: transparent;
+    
+    transition:
+      background-color 250ms ease,
+      border-color 250ms ease,
+      box-shadow 250ms ease;
+  }
+  
+  .navbar.scrolled,
+  .navbar.menuIsOpen {
+    background: var(--nav-bg);
+    border-bottom-color: var(--nav-line);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  }
+  
+  .inner {
+    position: relative;
+    z-index: 3;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 0 clamp(24px, 5vw, 80px);
+  }
+  
+  .desktopLeft,
+  .desktopRight {
+    display: flex;
+    align-items: center;
+    gap: clamp(22px, 3vw, 44px);
+  }
+  
+  .desktopLeft {
+    justify-self: start;
+  }
+  
+  .desktopRight {
+    justify-self: end;
+  }
+  
+  .navLink,
+  .contactLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--nav-text);
+    font-size: 16px;
+    font-weight: 300;
+    letter-spacing: 0.035em;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 180ms ease;
+  }
+  
+  .navLink:hover,
+  .contactLink:hover {
+    color: #b29f81;
+  }
+  
+  .contactLink {
+    gap: 10px;
+  }
+  
+  .arrow {
+    font-size: 15px;
+    transition: transform 180ms ease;
+  }
+  
+  .contactLink:hover .arrow {
+    transform: translate(2px, -2px);
+  }
+  
+  .logo {
+    position: relative;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    line-height: 0;
+  }
+  
+  .logoImage {
+    display: block;
+    width: 120px;
+    height: auto;
+    max-height: 48px;
+    object-fit: contain;
+  }
+  
+  .menuButton {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 49px;
+    height: 49px;
+    padding: 0;
+    color: var(--nav-text);
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .menuButton:focus-visible {
+    outline: 2px solid var(--nav-accent);
+    outline-offset: 3px;
+  }
+  
+  .menuIcon {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 6px;
+    width: 25px;
+    height: 25px;
+  }
+  
+  .menuIcon > span {
+    display: block;
+    width: 25px;
+    height: 1px;
+    background: currentColor;
+    transform-origin: center;
+    transition:
+      width 220ms ease,
+      transform 220ms ease,
+      opacity 180ms ease;
+  }
+  
+  .menuIcon > span:nth-child(2) {
+    width: 17px;
+  }
+  
+  .menuButton:hover .menuIcon > span:nth-child(2) {
+    width: 25px;
+  }
+  
+  .iconOpen > span:first-child {
+    transform: translateY(7px) rotate(45deg);
+  }
+  
+  .iconOpen > span:nth-child(2) {
+    width: 25px;
+    opacity: 0;
+  }
+  
+  .iconOpen > span:last-child {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+  
+  .mobileBackdrop,
+  .mobileMenu {
+    display: none;
+  }
+  
+  /* Tablet och mobil */
+  @media (max-width: 900px) {
+    .navbar {
+      height: 72px;
+    }
+  
+    .inner {
+      grid-template-columns: 1fr auto 1fr;
+      padding: 0 24px;
+    }
+  
+    .desktopLeft,
+    .desktopRight {
+      display: none;
+    }
+  
+    .logo {
+      grid-column: 2;
+      grid-row: 1;
+    }
+  
+    .logoImage {
+      width: 150px;
+      max-height: 42px;
+    }
+  
+    .menuButton {
+      display: inline-flex;
+      grid-column: 3;
+      grid-row: 1;
+      justify-self: end;
+    }
+  
+    .mobileBackdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      display: block;
+      width: 100%;
+      height: 100dvh;
+      padding: 0;
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+      background: rgba(20, 21, 18, 0.9);
+      border: 0;
+      border-radius: 0;
+      backdrop-filter: blur(0);
+      -webkit-backdrop-filter: blur(0);
+      transition:
+        opacity 320ms ease,
+        visibility 320ms ease,
+        backdrop-filter 320ms ease,
+        -webkit-backdrop-filter 320ms ease;
+    }
+  
+    .mobileBackdropVisible {
+      visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+      backdrop-filter: blur(7px);
+      -webkit-backdrop-filter: blur(7px);
+    }
+  
+    .mobileMenu {
+      position: fixed;
+      inset: 0 0 0 auto;
+      z-index: 2;
+      display: block;
+      width: min(62vw, 440px);
+      min-width: 280px;
+      height: 100vh;
+      height: 100dvh;
+      overflow-y: auto;
+      color: var(--nav-text);
+      background: #747A73;
+      box-shadow: -18px 0 60px rgba(0, 0, 0, 0.09);
+      visibility: hidden;
+      pointer-events: none;
+      transform: translate3d(100%, 0, 0);
+      transition:
+        transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
+        visibility 420ms;
+      will-change: transform;
+    }
+  
+    .mobileMenuOpen {
+      visibility: visible;
+      pointer-events: auto;
+      transform: translate3d(0, 0, 0);
+    }
+  
+    .mobileMenuContent {
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      padding: 112px clamp(24px, 4vw, 42px) 30px;
+    }
+  
+    .mobileMenuTop {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--nav-line);
+    }
+  
+    .mobileEyebrow,
+    .mobileMenuIndex {
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+    }
+  
+    .mobileEyebrow {
+      color: var(--nav-accent);
+    }
+  
+    .mobileMenuIndex {
+      color: var(--nav-muted);
+      font-size: 8px;
+      text-align: right;
+    }
+  
+    .mobileLinks {
+      display: flex;
+      flex-direction: column;
+      margin-top: 12px;
+    }
+  
+    .mobileLink {
+      display: grid;
+      grid-template-columns: 24px minmax(0, 1fr) 18px;
+      align-items: center;
+      gap: 10px;
+      min-height: 76px;
+      padding: 12px 0;
+      color: var(--nav-text);
+      text-decoration: none;
+      border-bottom: 1px solid var(--nav-line);
+      transition: color 180ms ease;
+    }
+  
+    .mobileLink:hover {
+      color: var(--nav-accent);
+    }
+  
+    .mobileLinkNumber {
+      align-self: center;
+      color: var(--nav-muted);
+      font-size: 9px;
+      letter-spacing: 0.04em;
+    }
+  
+    .mobileLinkLabel {
+      font-family: inherit;
+      font-size: clamp(17px, 2.5vw, 23px);
+      font-weight: 400;
+      letter-spacing: -0.035em;
+      line-height: 1.2;
+      overflow-wrap: anywhere;
+    }
+  
+    .mobileArrow {
+      justify-self: end;
+      align-self: center;
+      font-size: 15px;
+      transition: transform 180ms ease;
+    }
+  
+    .mobileLink:hover .mobileArrow {
+      transform: translate(2px, -2px);
+    }
+  
+    .mobileFooter {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-top: auto;
+      padding-top: 36px;
+    }
+  
+    .mobileFooter > span {
+      color: var(--nav-muted);
+      font-size: 8px;
+      letter-spacing: 0.12em;
+      line-height: 1.8;
+    }
+  
+    .mobileFooter > a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding-bottom: 12px;
+      color: var(--nav-text);
+      font-size: 12px;
+      text-decoration: none;
+      border-bottom: 1px solid var(--nav-text);
+    }
+  }
+  
+  /* Små mobiler */
+  @media (max-width: 480px) {
+    .inner {
+      padding: 0 18px;
+    }
+  
+    .logoImage {
+      width: 132px;
+      max-height: 38px;
+    }
+  
+    .mobileMenu {
+      width: 82vw;
+      min-width: 0;
+    }
+  
+    .mobileMenuContent {
+      padding: 100px 24px 24px;
+    }
+  
+    .mobileLink {
+      min-height: 68px;
+      grid-template-columns: 20px minmax(0, 1fr) 16px;
+      gap: 8px;
+    }
+  
+    .mobileLinkLabel {
+      font-size: clamp(17px, 5vw, 22px);
+    }
+  
+    .mobileMenuIndex {
+      font-size: 7px;
+    }
+  }
+  
+  /* Respektera inställningar för minskad rörelse */
+  @media (prefers-reduced-motion: reduce) {
+    .navbar,
+    .navLink,
+    .contactLink,
+    .arrow,
+    .menuIcon > span,
+    .mobileBackdrop,
+    .mobileMenu,
+    .mobileLink,
+    .mobileArrow {
+      transition: none;
+    }
+  }
+  

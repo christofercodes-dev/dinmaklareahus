@@ -1,0 +1,857 @@
+.page {
+  background: #f9f7f3;
+  padding: 100px 0 120px;
+  color: #20231f;
+  min-height: 100vh;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 85px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e4e2da;
+}
+
+.headingWrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.eyebrow {
+  margin: 0 0 16px;
+  font-family: var(--font-geist-sans), Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #b8ad91;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(20px, 8vw, 40px);
+  font-weight: 300;
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+  color: #20231f;
+}
+
+.count {
+  font-family: var(--font-geist-sans), Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #686b64;
+  padding-bottom: 8px;
+}
+
+/* Grid */
+
+/* =========================================
+   FASTIGHETSKORT – SKANDINAVISK PREMIUMDESIGN
+   ========================================= */
+
+   .grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: clamp(28px, 4vw, 54px);
+    row-gap: 52px;
+    align-items: start;
+  }
+  
+  /* Kortet */
+  .property {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    color: #292b26;
+    text-decoration: none;
+    background: transparent;
+    outline-offset: 6px;
+  }
+  
+  /* Bilden */
+  .imageWrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1.42 / 1;
+    overflow: hidden;
+    background: #e8e6df;
+    isolation: isolate;
+  }
+  
+  .image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition:
+      transform 700ms cubic-bezier(0.2, 0.65, 0.3, 1),
+      filter 500ms ease;
+  }
+  
+  /* Diskret toning på bilden */
+  .imageWrap::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      rgba(24, 26, 22, 0.13) 0%,
+      transparent 25%,
+      transparent 68%,
+      rgba(24, 26, 22, 0.08) 100%
+    );
+  }
+  
+  /* Små etiketter uppe på bilden */
+  .imageNumber {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    z-index: 2;
+    padding: 8px 11px;
+    background: rgba(248, 247, 243, 0.94);
+    color: #292b26;
+    font-family: var(--font-geist-sans), Arial, sans-serif;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+  
+  .imageArrow {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 2;
+    display: grid;
+    width: 36px;
+    height: 36px;
+    place-items: center;
+    border: 1px solid rgba(248, 247, 243, 0.75);
+    border-radius: 50%;
+    color: #292b26;
+    background: rgba(248, 247, 243, 0.92);
+    font-size: 16px;
+    transition:
+      color 250ms ease,
+      background 250ms ease,
+      transform 250ms ease;
+  }
+  
+  /* Informationen direkt under bilden */
+  .details {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: 18px;
+    row-gap: 8px;
+    padding-top: 15px;
+  }
+  
+  .propertyInfo {
+    min-width: 0;
+    margin: 0;
+  }
+  
+  .location {
+    margin: 0 0 4px;
+    color: #8d8879;
+    font-family: var(--font-geist-sans), Arial, sans-serif;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.17em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+  
+  .address {
+    margin: 0;
+    color: #292b26;
+    font-family: var(--font-cormorant), Georgia, serif;
+    font-size: clamp(24px, 2.5vw, 34px);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.025em;
+    overflow-wrap: anywhere;
+  }
+  
+  /* Pris och fakta på samma rad */
+  .metaRow {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 7px;
+    min-width: 0;
+    color: #686b64;
+    font-family: var(--font-geist-sans), Arial, sans-serif;
+    font-size: 10px;
+    line-height: 1.6;
+    text-align: right;
+  }
+  
+  .price {
+    color: #292b26;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  
+  .metaItem {
+    white-space: nowrap;
+  }
+  
+  .dot {
+    color: #b8ad91;
+    font-size: 13px;
+  }
+  
+  /* Elegant hover på aktiva objekt */
+  .property:not(.soldProperty) .imageWrap {
+    background: #e8e6df;
+  }
+  
+  .property:not(.soldProperty):hover .image {
+    transform: scale(1.035);
+  }
+  
+  .property:not(.soldProperty):hover .imageArrow {
+    color: #f8f7f3;
+    background: #292b26;
+    transform: translate(2px, -2px);
+  }
+  
+  .property:not(.soldProperty):hover .address {
+    color: #777c70;
+  }
+  
+  /* Sålda objekt behåller sin egen märkning */
+  .soldProperty .imageWrap::after {
+    z-index: 1;
+    background: rgba(32, 35, 31, 0.42);
+  }
+  
+  .soldProperty .imageNumber,
+  .soldProperty .imageArrow {
+    display: none;
+  }
+  
+  .soldProperty .soldBadge {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    bottom: auto;
+    z-index: 2;
+    transform: translate(-50%, -50%);
+    padding: 13px 22px;
+    border: 1px solid rgba(248, 247, 243, 0.85);
+    background: rgba(32, 35, 31, 0.18);
+    color: #f8f7f3;
+    font-family: var(--font-geist-sans), Arial, sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  
+  /* Kontaktkortet som fyller en tom plats */
+  .contactCard {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    padding: clamp(28px, 4vw, 48px);
+    color: #292b26;
+    text-decoration: none;
+    background: #eae8e1;
+    transition: background-color 300ms ease;
+  }
+  
+  .contactCard:hover {
+    background: #e4e2da;
+  }
+  
+  .contactContent {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    height: 100%;
+  }
+  
+  .contactEyebrow {
+    margin: 0 0 16px;
+    color: #8d8879;
+    font-family: var(--font-geist-sans), Arial, sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  
+  .contactTitle {
+    margin: 0 0 14px;
+    color: #292b26;
+    font-family: var(--font-cormorant), Georgia, serif;
+    font-size: clamp(34px, 4vw, 46px);
+    font-weight: 400;
+    line-height: 1;
+  }
+  
+  .contactText {
+    max-width: 360px;
+    margin: 0 0 26px;
+    color: #686b64;
+    font-family: var(--font-geist-sans), Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1.8;
+  }
+  
+  .contactLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 24px;
+    width: fit-content;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(41, 43, 38, 0.6);
+    color: #292b26;
+    font-family: var(--font-geist-sans), Arial, sans-serif;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: gap 250ms ease;
+  }
+  
+  .contactCard:hover .contactLink {
+    gap: 34px;
+  }
+  
+  .arrow {
+    font-size: 14px;
+  }
+  
+  /* Mobil */
+  @media (max-width: 850px) {
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 38px;
+    }
+  
+    .imageWrap {
+      aspect-ratio: 1.45 / 1;
+    }
+  
+    .details {
+      grid-template-columns: minmax(0, 1fr) auto;
+      column-gap: 12px;
+      padding-top: 13px;
+    }
+  
+    .address {
+      font-size: clamp(25px, 5vw, 32px);
+    }
+  
+    .metaRow {
+      font-size: 10px;
+    }
+  }
+  
+  /* Små skärmar: låt adressen och faktaraden få plats */
+  @media (max-width: 520px) {
+    .grid {
+      gap: 34px;
+    }
+  
+    .imageWrap {
+      aspect-ratio: 1.2 / 1;
+    }
+  
+    .imageNumber {
+      top: 11px;
+      left: 11px;
+      padding: 7px 9px;
+      font-size: 8px;
+    }
+  
+    .imageArrow {
+      top: 10px;
+      right: 10px;
+      width: 32px;
+      height: 32px;
+    }
+  
+    .details {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 9px;
+      padding-top: 13px;
+    }
+  
+    .address {
+      font-size: 29px;
+      line-height: 1.02;
+    }
+  
+    .metaRow {
+      justify-content: flex-start;
+      gap: 7px;
+      text-align: left;
+      font-size: 10px;
+    }
+  
+    .price {
+      font-size: 12px;
+    }
+  
+    .contactCard {
+      min-height: 270px;
+      padding: 28px;
+    }
+  
+    .soldProperty .soldBadge {
+      padding: 11px 18px;
+      font-size: 10px;
+    }
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .image,
+    .imageArrow,
+    .address,
+    .contactCard,
+    .contactLink {
+      transition: none;
+    }
+  }
+  
+
+/* Kontaktdelen (fyller upp vid udda antal) */
+.contactCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #eae8e1;
+  padding: clamp(40px, 5vw, 60px);
+  text-decoration: none;
+  color: #20231f;
+  transition: background-color 0.4s ease;
+}
+
+.contactCard:hover {
+  background: #e4e2da;
+}
+
+.contactContent {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.contactEyebrow {
+  margin: 0 0 16px;
+  font-family: var(--font-geist-sans), Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #b8ad91;
+}
+
+.contactTitle {
+  margin: 0 0 20px;
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(34px, 4vw, 46px);
+  font-weight: 300;
+  line-height: 1.05;
+  color: #20231f;
+}
+
+.contactText {
+  margin: 0 0 40px;
+  font-family: var(--font-geist-sans), Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: #686b64;
+  max-width: 420px;
+}
+
+.contactLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 38px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(32, 35, 31, 0.75);
+  color: #20231f;
+  font-family: var(--font-geist-sans), Arial, sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  width: fit-content;
+  transition: gap 0.3s ease, border-color 0.3s ease;
+}
+
+.contactCard:hover .contactLink {
+  gap: 50px;
+  border-color: #20231f;
+}
+
+.arrow {
+  font-size: 14px;
+}
+
+/* Empty state */
+.empty {
+  padding: 120px 0;
+  text-align: center;
+}
+
+.emptyText {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: 28px;
+  font-weight: 300;
+  color: #686b64;
+}
+
+
+/* Sålda fastigheter */
+.soldSection {
+  margin-top: 120px;
+  padding-top: 70px;
+  border-top: 1px solid #e4e2da;
+}
+
+.soldSection .header {
+  margin-bottom: 55px;
+}
+
+.soldSection .eyebrow {
+  color: #a79a7b;
+}
+
+.soldSection .grid {
+  row-gap: clamp(40px, 5vw, 65px);
+}
+
+/* Märkning på sålda objekt */
+.imageWrap {
+  position: relative;
+}
+
+.soldBadge {
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  background: rgba(32, 35, 31, 0.92);
+  color: #f8f7f3;
+  font-family: var(--font-geist-sans), Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  line-height: 1;
+  text-transform: uppercase;
+  backdrop-filter: blur(6px);
+}
+
+/* Mörk overlay på sålda fastigheter */
+.soldProperty .imageWrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+/*   background: linear-gradient(
+    to top,
+    rgba(20, 22, 19, 0.62) 0%,
+    rgba(20, 22, 19, 0.22) 45%,
+    rgba(20, 22, 19, 0.12) 100%
+  ); */
+  background: rgba(32, 35, 31, 0.5);
+  pointer-events: none;
+  z-index: 1;
+  transition: background 0.4s ease;
+}
+
+/* Diskret SÅLD-stämpel ovanpå bilden */
+.soldProperty .soldBadge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  bottom: auto;
+  z-index: 2;
+  transform: translate(-50%, -50%);
+
+  padding: 14px 24px;
+  border: 1px solid rgba(248, 247, 243, 0.85);
+  background: rgba(32, 35, 31, 0.25);
+  color: #f8f7f3;
+
+  font-family: var(--font-geist-sans), Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+
+  backdrop-filter: blur(4px);
+  white-space: nowrap;
+}
+
+
+
+/* =========================================
+   RESPONSIV MOBILANPASSNING
+   Desktop lämnas oförändrad
+   ========================================= */
+
+   @media (max-width: 850px) {
+    .page {
+      padding: 56px 0 72px;
+    }
+  
+    .header {
+      margin-bottom: 36px;
+      padding-bottom: 20px;
+
+    }
+  
+    .eyebrow {
+      margin-bottom: 12px;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+    }
+  
+    .title {
+      font-size: clamp(26px, 6vw, 36px);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+  
+    .grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 38px;
+    }
+  
+    .imageWrap {
+      aspect-ratio: 1.4 / 1;
+    }
+  
+    .details {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 10px;
+      padding-top: 14px;
+    }
+  
+    .location {
+      margin-bottom: 6px;
+      font-size: 9px;
+      letter-spacing: 0.14em;
+    }
+  
+    .address {
+      font-size: clamp(27px, 5.5vw, 34px);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      overflow-wrap: break-word;
+      hyphens: auto;
+    }
+  
+    .metaRow {
+      justify-content: flex-start;
+      flex-direction: row;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 5px 8px;
+      text-align: left;
+      font-size: 11px;
+      line-height: 1.6;
+    }
+  
+    .price {
+      font-size: 12px;
+    }
+  
+    .metaItem {
+      white-space: nowrap;
+    }
+  
+    .contactCard {
+      min-height: 260px;
+      padding: 30px 26px;
+    }
+  
+    .contactContent {
+      justify-content: flex-start;
+    }
+  
+    .contactEyebrow {
+      margin-bottom: 14px;
+      font-size: 10px;
+    }
+  
+    .contactTitle {
+      margin-bottom: 14px;
+      font-size: clamp(34px, 8vw, 42px);
+      line-height: 1.02;
+    }
+  
+    .contactText {
+      margin-bottom: 24px;
+      font-size: 12px;
+      line-height: 1.75;
+    }
+  
+    .contactLink {
+      gap: 22px;
+      padding-bottom: 10px;
+      font-size: 9px;
+    }
+  
+    .soldSection {
+      margin-top: 64px;
+      padding-top: 38px;
+    }
+  
+    .soldSection .header {
+      margin-bottom: 32px;
+    }
+  
+    .soldSection .grid {
+      row-gap: 38px;
+    }
+  
+    .empty {
+      padding: 64px 12px;
+    }
+  
+    .emptyText {
+      font-size: 25px;
+      line-height: 1.2;
+    }
+  }
+  
+  @media (max-width: 520px) {
+    .page {
+      padding: 38px 0 56px;
+      margin-top: 100px;
+    }
+  
+    .header {
+      margin-bottom: 28px;
+      padding-bottom: 18px;
+    }
+  
+    .title {
+      font-size: clamp(25px, 7vw, 32px);
+    }
+  
+    .grid {
+      gap: 32px;
+    }
+  
+    .imageWrap {
+      aspect-ratio: 1.22 / 1;
+    }
+  
+    .imageNumber {
+      top: 10px;
+      left: 10px;
+      padding: 7px 9px;
+      font-size: 8px;
+      letter-spacing: 0.1em;
+    }
+  
+    .imageArrow {
+      top: 9px;
+      right: 9px;
+      width: 32px;
+      height: 32px;
+      font-size: 14px;
+    }
+  
+    .details {
+      gap: 9px;
+      padding-top: 12px;
+    }
+  
+    .address {
+      font-size: clamp(25px, 7.2vw, 30px);
+      line-height: 1.04;
+    }
+  
+    .metaRow {
+      column-gap: 6px;
+      row-gap: 3px;
+      font-size: 10px;
+    }
+  
+    .price {
+      font-size: 11px;
+    }
+  
+    .dot {
+      font-size: 12px;
+    }
+  
+    .contactCard {
+      min-height: 0;
+      padding: 26px 22px;
+    }
+  
+    .contactTitle {
+      font-size: 35px;
+    }
+  
+    .contactText {
+      margin-bottom: 22px;
+    }
+  
+    .soldSection {
+      margin-top: 54px;
+      padding-top: 32px;
+    }
+  
+    .soldSection .header {
+      margin-bottom: 26px;
+    }
+  
+    .soldSection .grid {
+      row-gap: 32px;
+    }
+  
+    .soldProperty .soldBadge {
+      left: 50%;
+      top: 50%;
+      bottom: auto;
+      padding: 10px 17px;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      transform: translate(-50%, -50%);
+    }
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .image,
+    .imageArrow,
+    .address,
+    .contactCard,
+    .contactLink {
+      transition: none;
+    }
+  }
+  

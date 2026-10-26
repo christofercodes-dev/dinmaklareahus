@@ -1,0 +1,219 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 28px;
+    pointer-events: none;
+  }
+  
+  .banner {
+    width: min(100%, 440px);
+    max-height: calc(100dvh - 40px);
+    overflow-y: auto;
+    padding: 30px;
+    background: #f8f7f3;
+    color: #292b26;
+    border: 1px solid rgba(41, 43, 38, 0.12);
+    box-shadow: 0 18px 70px rgba(30, 30, 25, 0.18);
+    pointer-events: auto;
+    animation: cookieAppear 0.45s ease-out both;
+  }
+  
+  .topLine {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #dedbd2;
+  }
+  
+  .eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    font-weight: 600;
+    color: #747a73;
+  }
+  
+  .cookieIcon {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border: 1px solid #d7d2c6;
+    border-radius: 50%;
+    color: #747a73;
+    font-size: 20px;
+  }
+  
+  .title {
+    margin: 23px 0 14px;
+    font-family: var(--font-cormorant, Georgia, serif);
+    font-size: clamp(30px, 4vw, 39px);
+    line-height: 1.04;
+    font-weight: 400;
+    letter-spacing: -0.035em;
+  }
+  
+  .description {
+    margin: 0;
+    color: #65675f;
+    font-size: 13px;
+    line-height: 1.8;
+  }
+  
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    margin-top: 24px;
+  }
+  
+  .primaryButton,
+  .secondaryButton,
+  .textButton {
+    min-height: 46px;
+    width: 100%;
+    padding: 12px 16px;
+    font: inherit;
+    font-size: 12px;
+    letter-spacing: 0.035em;
+    cursor: pointer;
+    transition:
+      background 0.2s ease,
+      color 0.2s ease,
+      border-color 0.2s ease;
+  }
+  
+  .primaryButton {
+    border: 1px solid #747a73;
+    background: #747a73;
+    color: #fff;
+  }
+  
+  .primaryButton:hover {
+    background: #5f655e;
+    border-color: #5f655e;
+  }
+  
+  .secondaryButton {
+    border: 1px solid #d7d2c6;
+    background: transparent;
+    color: #292b26;
+  }
+  
+  .secondaryButton:hover {
+    border-color: #747a73;
+    background: #efeee8;
+  }
+  
+  .textButton {
+    min-height: 34px;
+    border: 0;
+    background: transparent;
+    color: #65675f;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  
+  .footnote {
+    margin: 18px 0 0;
+    color: #85867e;
+    font-size: 10px;
+    line-height: 1.7;
+  }
+  
+  .settings {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    border-top: 1px solid #dedbd2;
+  }
+  
+  .settingRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 15px 0;
+    border-bottom: 1px solid #dedbd2;
+    cursor: pointer;
+  }
+  
+  .settingRow strong {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  
+  .settingRow p {
+    margin: 5px 0 0;
+    color: #74766e;
+    font-size: 11px;
+    line-height: 1.6;
+  }
+  
+  .settingRow input {
+    width: 17px;
+    height: 17px;
+    accent-color: #747a73;
+    flex-shrink: 0;
+  }
+  
+  .alwaysOn {
+    flex-shrink: 0;
+    color: #747a73;
+    font-size: 10px;
+  }
+  
+  .primaryButton:focus-visible,
+  .secondaryButton:focus-visible,
+  .textButton:focus-visible,
+  .settingRow input:focus-visible {
+    outline: 2px solid #747a73;
+    outline-offset: 3px;
+  }
+  
+  @keyframes cookieAppear {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+  
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .overlay {
+      padding: 12px;
+      align-items: flex-end;
+      justify-content: center;
+    }
+  
+    .banner {
+      width: 100%;
+      max-height: calc(100dvh - 24px);
+      padding: 24px;
+    }
+  
+    .title {
+      font-size: 33px;
+    }
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .banner {
+      animation: none;
+    }
+  
+    .primaryButton,
+    .secondaryButton,
+    .textButton {
+      transition: none;
+    }
+  }

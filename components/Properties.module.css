@@ -1,0 +1,448 @@
+
+.section {
+  padding: clamp(56px, 7vw, 96px) 0 clamp(72px, 9vw, 112px);
+  background: #f8f7f3;
+  color: #20231f;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: clamp(34px, 5vw, 58px);
+  padding: 0 20px 25px;
+  border-bottom: 1px solid #e4e2da;
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0 0 16px;
+  color: #a99b7d;
+  font-family: var(--font-geist-sans), Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+  color: #20231f;
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(38px, 5.2vw, 60px);
+  font-weight: 300;
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+}
+
+/* Fastighetskort */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(22px, 3.5vw, 52px);
+  row-gap: clamp(38px, 5vw, 64px);
+  align-items: start;
+}
+
+.property {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  color: #292b26;
+  text-decoration: none;
+  background: transparent;
+  outline-offset: 6px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Bild */
+.imageWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1.38 / 1;
+  overflow: hidden;
+  background: #e8e6df;
+  isolation: isolate;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition:
+    transform 700ms cubic-bezier(0.2, 0.65, 0.3, 1),
+    filter 500ms ease;
+}
+
+.imageWrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(24, 26, 22, 0.12) 0%,
+    transparent 28%,
+    transparent 72%,
+    rgba(24, 26, 22, 0.08) 100%
+  );
+}
+
+.imageNumber {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  z-index: 2;
+  max-width: calc(100% - 70px);
+  padding: 8px 10px;
+  background: rgba(248, 247, 243, 0.95);
+  color: #292b26;
+  font-family: var(--font-geist-sans), Arial, sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.imageArrow {
+  position: absolute;
+  top: 13px;
+  right: 13px;
+  z-index: 2;
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 1px solid rgba(248, 247, 243, 0.8);
+  border-radius: 50%;
+  color: #292b26;
+  background: rgba(248, 247, 243, 0.94);
+  font-size: 16px;
+  transition:
+    color 250ms ease,
+    background 250ms ease,
+    transform 250ms ease;
+}
+
+/* Information under bilden */
+.details {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  column-gap: 16px;
+  row-gap: 12px;
+  padding-top: 17px;
+}
+
+.propertyInfo {
+  min-width: 0;
+  margin: 0;
+}
+
+.location {
+  margin: 0 0 7px;
+  color: #8d8879;
+  font-family: var(--font-geist-sans), Arial, sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  line-height: 1.5;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.address {
+  margin: 0;
+  color: #292b26;
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(25px, 2.7vw, 36px);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  overflow-wrap: anywhere;
+  transition: color 250ms ease;
+}
+
+/* Pris och fakta */
+.metaRow {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+  min-width: 0;
+  color: #686b64;
+  font-family: var(--font-geist-sans), Arial, sans-serif;
+  font-size: 10px;
+  line-height: 1.7;
+  text-align: right;
+}
+
+.price {
+  color: #292b26;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.metaItem {
+  white-space: nowrap;
+}
+
+.dot {
+  color: #b8ad91;
+  font-size: 13px;
+}
+
+/* Länk och hover */
+.property:hover .image {
+  transform: scale(1.035);
+}
+
+.property:hover .imageArrow {
+  color: #f8f7f3;
+  background: #292b26;
+  transform: translate(2px, -2px);
+}
+
+.property:hover .address {
+  color: #777c70;
+}
+
+.property:focus-visible {
+  outline: 2px solid #8d8879;
+  outline-offset: 6px;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(38px, 5vw, 58px);
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  max-width: 100%;
+  padding: 12px 0;
+  border: 0;
+  border-bottom: 1px solid rgba(32, 35, 31, 0.65);
+  color: #20231f;
+  background: transparent;
+  font-family: var(--font-geist-sans), Arial, sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.17em;
+  line-height: 1.7;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: gap 300ms ease, border-color 300ms ease;
+}
+
+.button:hover {
+  gap: 38px;
+  border-color: #20231f;
+}
+
+.button span:last-child {
+  font-size: 14px;
+}
+
+.empty {
+  padding: 60px 20px;
+  color: #686b64;
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: 300;
+  text-align: center;
+}
+
+/* Surfplattor och mindre laptops */
+@media (max-width: 850px) {
+  .section {
+    padding: 62px 0 82px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 22px;
+    row-gap: 38px;
+  }
+
+  .imageWrap {
+    aspect-ratio: 1.12 / 1;
+  }
+
+  .imageNumber {
+    top: 11px;
+    left: 11px;
+    padding: 7px 9px;
+    font-size: 8px;
+  }
+
+  .imageArrow {
+    top: 9px;
+    right: 9px;
+    width: 32px;
+    height: 32px;
+  }
+
+  .details {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+    padding-top: 14px;
+  }
+
+  .address {
+    font-size: clamp(25px, 3.8vw, 32px);
+    line-height: 1.05;
+  }
+
+  .metaRow {
+    justify-content: flex-start;
+    text-align: left;
+  }
+}
+
+/* Mobil */
+@media (max-width: 600px) {
+  .section {
+    padding: 48px 0 68px;
+  }
+
+  .heading {
+    margin-bottom: 30px;
+    padding: 0 18px 21px;
+  }
+
+  .eyebrow {
+    margin-bottom: 12px;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+  }
+
+  .title {
+    font-size: clamp(37px, 10vw, 48px);
+    line-height: 1;
+  }
+
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 34px;
+  }
+
+  .imageWrap {
+    aspect-ratio: 1.22 / 1;
+  }
+
+  .imageNumber {
+    top: 12px;
+    left: 12px;
+    padding: 7px 9px;
+    font-size: 8px;
+  }
+
+  .imageArrow {
+    top: 10px;
+    right: 10px;
+    width: 34px;
+    height: 34px;
+  }
+
+  .details {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    column-gap: 12px;
+    row-gap: 10px;
+    padding-top: 14px;
+  }
+
+  .location {
+    margin-bottom: 6px;
+    font-size: 8px;
+    letter-spacing: 0.13em;
+  }
+
+  .address {
+    font-size: clamp(27px, 7.5vw, 34px);
+    line-height: 1.02;
+  }
+
+  .metaRow {
+    justify-content: flex-end;
+    gap: 5px 7px;
+    font-size: 9px;
+    text-align: right;
+  }
+
+  .price {
+    font-size: 11px;
+  }
+
+  .footer {
+    margin-top: 36px;
+    padding: 0 18px;
+  }
+
+  .button {
+    gap: 20px;
+    font-size: 8px;
+    letter-spacing: 0.14em;
+  }
+
+  .button:hover {
+    gap: 25px;
+  }
+}
+
+/* Mycket smala mobiler */
+@media (max-width: 380px) {
+  .details {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .metaRow {
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .imageWrap {
+    aspect-ratio: 1.08 / 1;
+  }
+
+  .button {
+    gap: 14px;
+    font-size: 7px;
+    letter-spacing: 0.12em;
+  }
+}
+
+/* Tillgänglighet */
+@media (hover: none) {
+  .property:hover .image {
+    transform: none;
+  }
+
+  .property:hover .imageArrow {
+    color: #292b26;
+    background: rgba(248, 247, 243, 0.94);
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image,
+  .imageArrow,
+  .address,
+  .button {
+    transition: none;
+  }
+}
