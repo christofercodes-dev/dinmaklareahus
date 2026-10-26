@@ -105,7 +105,7 @@ export default function Navbar() {
                     onClick={closeMenu}
                 >
                     <Image
-                        src="/images/logga-vit.png"
+                        src="/images/Logga-vit.png"
                         alt="Logotyp"
                         width={168}
                         height={48}
