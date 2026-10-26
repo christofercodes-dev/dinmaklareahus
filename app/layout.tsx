@@ -26,6 +26,11 @@ export const metadata: Metadata = {
   description: "Exklusiva fastigheter med karaktär",
 };
 
+export const viewport = {
+  themeColor: "#747A73",
+};
+
+
 export default function RootLayout({
   children,
 }: Readonly<{
