@@ -59,7 +59,8 @@ export default function Navbar() {
         "/fastigheter",
         "/sell-page",
         "/kontakt",
-        "/om-oss"
+        "/om-oss",
+        "/maklaren"
     ].includes(pathname);
 
     useEffect(() => {

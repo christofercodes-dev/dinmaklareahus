@@ -122,7 +122,7 @@
     }
     
     .heading h2 {
-    font-size: clamp(60px, 15vw, 90px);
+    font-size: clamp(60px, 15vw, 60px);
     }
     
     .grid {
@@ -153,7 +153,7 @@
     }
     
     .heading h2 {
-    font-size: clamp(55px, 17vw, 78px);
+    font-size: clamp(55px, 17vw, 58px);
     }
     
     .grid {

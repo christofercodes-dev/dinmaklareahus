@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 import { Cormorant_Garamond, Hanken_Grotesk } from "next/font/google";
 import { getDeal } from "@/lib/mspecs";
@@ -62,7 +61,8 @@ function getImages(deal: AnyRecord) {
 }
 
 function getMainBuilding(deal: AnyRecord) {
-    const buildings = deal?.buildings?.buildings ?? deal?.buildings ?? [];
+    const buildings =
+        deal?.buildings?.buildings ?? deal?.buildings ?? [];
 
     if (!Array.isArray(buildings)) return buildings ?? {};
 
@@ -119,6 +119,7 @@ function normalizeRooms(value: any): string {
             const result = normalizeRooms(item);
             if (result) return result;
         }
+
         return "";
     }
 
@@ -142,7 +143,6 @@ function normalizeRooms(value: any): string {
 
     return "";
 }
-
 
 function getRooms(deal: AnyRecord, building: AnyRecord): string {
     const candidates = [
@@ -170,7 +170,6 @@ function getRooms(deal: AnyRecord, building: AnyRecord): string {
     return "";
 }
 
-
 export default async function PropertyPage({
     params,
 }: {
@@ -189,6 +188,7 @@ export default async function PropertyPage({
                         <p className={styles.eyebrow}>Vårt utbud</p>
                         <h1>Vi kunde inte hitta objektet.</h1>
                         <p>Objektet kan ha tagits bort eller flyttats.</p>
+
                         <Link href="/" className={styles.backLink}>
                             <span aria-hidden="true">←</span>
                             Tillbaka till objekten
@@ -200,6 +200,7 @@ export default async function PropertyPage({
     }
 
     const images = getImages(deal);
+
     const mainImage =
         images.find((image: AnyRecord) => image?.isMainImage) ?? images[0];
 
@@ -240,14 +241,11 @@ export default async function PropertyPage({
         )
     );
 
-    const cityLine = [postalCode, city].filter(Boolean).join(" ");
-    const locationLine = [address, cityLine].filter(Boolean).join(", ");
-
     const facts = [
-        { label: "Boarea", value: livingArea, featured: false },
-        { label: "Rum", value: rooms ? `${rooms} rum` : "", featured: false },
-        { label: "Tomt", value: plotArea, featured: false },
-        { label: "Objektstyp", value: propertyType, featured: false },
+        { label: "Boarea", value: livingArea },
+        { label: "Antal rum", value: rooms ? `${rooms} rum` : "" },
+        { label: "Tomtarea", value: plotArea },
+        { label: "Pris", value: price },
     ].filter((fact) => fact.value);
 
     const fullDescription = formatText(deal?.sellingTexts?.sellingText);
@@ -260,6 +258,7 @@ export default async function PropertyPage({
     const [lead, ...rest] = paragraphs;
 
     const titleWords = title.split(/\s+/);
+
     const titleMain =
         titleWords.length > 1
             ? titleWords.slice(0, -1).join(" ")
@@ -272,7 +271,7 @@ export default async function PropertyPage({
         <main
             className={`${displayFont.variable} ${textFont.variable} ${styles.page}`}
         >
-            {/* HERO */}
+            {/* HUVUDBILD */}
             <section className={styles.hero}>
                 {mainImage?.viewUrl ? (
                     <img
@@ -288,7 +287,10 @@ export default async function PropertyPage({
                     />
                 )}
 
-                <div className={styles.heroShade} aria-hidden="true" />
+                <div
+                    className={styles.heroShade}
+                    aria-hidden="true"
+                />
 
                 <div className={`container ${styles.heroFrame}`}>
                     <div className={styles.heroBody}>
@@ -312,42 +314,48 @@ export default async function PropertyPage({
                             <span className={styles.heroLocationLabel}>
                                 {city}
                             </span>
-
                         </div>
                     </div>
                 </div>
             </section>
 
+            {/* FAKTARUTA UNDER BILDEN */}
+            <section
+                className={styles.factsSection}
+                aria-label="Fastighetsfakta"
+            >
+                <div className={`container ${styles.factsContainer}`}>
+                    <div className={styles.factsCard}>
+                        <div className={styles.factsTop}>
+                            <div>
+                                <p className={styles.sectionEyebrow}>
+                                    Överblick
+                                </p>
 
-            {/* FAKTA: tydligt separerade från huvudbilden */}
-            <section className={styles.factsSection} aria-label="Fastighetsfakta">
-                <div className="container">
-                    <div className={styles.factsTop}>
-                        <div>
-                            <p className={styles.sectionEyebrow}>Fastigheten</p>
+                            </div>
                         </div>
 
-                        {price && (
-                            <div className={styles.priceBlock}>
-                                <span className={styles.priceLabel}>Pris</span>
-                                <span className={styles.priceValue}>{price}</span>
-                            </div>
+                        {facts.length > 0 && (
+                            <dl className={styles.factsGrid}>
+                                {facts.map((fact, index) => (
+                                    <div
+                                        key={fact.label}
+                                        className={styles.factItem}
+                                    >
+                                        <span
+                                            className={styles.factIndex}
+                                            aria-hidden="true"
+                                        >
+                                            {String(index + 1).padStart(2, "0")}
+                                        </span>
+
+                                        <dt>{fact.label}</dt>
+                                        <dd>{fact.value}</dd>
+                                    </div>
+                                ))}
+                            </dl>
                         )}
                     </div>
-
-                    {facts.length > 0 && (
-                        <dl className={styles.factsGrid}>
-                            {facts.map((fact, index) => (
-                                <div key={fact.label} className={styles.factItem}>
-                                    <span className={styles.factIndex}>
-                                        {String(index + 1).padStart(2, "0")}
-                                    </span>
-                                    <dt>{fact.label}</dt>
-                                    <dd>{fact.value}</dd>
-                                </div>
-                            ))}
-                        </dl>
-                    )}
                 </div>
             </section>
 
@@ -355,36 +363,51 @@ export default async function PropertyPage({
             <section className={styles.story}>
                 <div className="container">
                     <div className={styles.storyHeader}>
-                        <p className={styles.sectionEyebrow}>Upptäck fastigheten</p>
-                        <span className={styles.storyRule} aria-hidden="true" />
+                        <p className={styles.sectionEyebrow}>
+                            Upptäck fastigheten
+                        </p>
+
+                        <span
+                            className={styles.storyRule}
+                            aria-hidden="true"
+                        />
                     </div>
 
                     <div className={styles.storyGrid}>
                         <article className={styles.storyText}>
-
-                            {lead && <p className={styles.lead}>{lead}</p>}
+                            {lead && (
+                                <p className={styles.lead}>{lead}</p>
+                            )}
 
                             {rest.length > 0 && (
                                 <div className={styles.body}>
-                                    {rest.map((paragraph: string, index: number) => (
-                                        <p key={index}>{paragraph}</p>
-                                    ))}
+                                    {rest.map(
+                                        (paragraph: string, index: number) => (
+                                            <p key={index}>{paragraph}</p>
+                                        )
+                                    )}
                                 </div>
                             )}
 
                             {!fullDescription && (
-                                <p className={styles.body}>
-                                    Kontakta oss gärna för mer information om fastigheten.
+                                <p className={styles.lead}>
+                                    Kontakta oss gärna för mer information om
+                                    fastigheten.
                                 </p>
                             )}
                         </article>
 
                         <aside className={styles.storySide}>
                             <div className={styles.sideHeading}>
-                                <p className={styles.sectionEyebrow}>Fördjupning</p>
-                                <h3>Information & detaljer</h3>
+                                <p className={styles.sectionEyebrow}>
+                                    Fördjupning
+                                </p>
+
+                                <h3>Information &amp; detaljer</h3>
+
                                 <p>
-                                    Allt du behöver veta om bostaden, samlat på ett ställe.
+                                    Allt du behöver veta om bostaden, samlat på
+                                    ett ställe.
                                 </p>
                             </div>
 
@@ -392,8 +415,12 @@ export default async function PropertyPage({
                                 <PropertyAccordion deal={deal} />
                             </div>
 
-                            <Link href="/kontakt" className={styles.detailsLink}>
-                                Fråga om fastigheten <span aria-hidden="true">↗</span>
+                            <Link
+                                href="/kontakt"
+                                className={styles.detailsLink}
+                            >
+                                Fråga om fastigheten{" "}
+                                <span aria-hidden="true">↗</span>
                             </Link>
                         </aside>
                     </div>
@@ -404,34 +431,49 @@ export default async function PropertyPage({
             {images.length > 0 && (
                 <section className={styles.gallerySection}>
                     <div className="container">
-                        <div className={styles.galleryHead}>
-                        </div>
+                        <div className={styles.galleryHead} />
 
                         <div className={styles.gallery}>
-                            {images.map((image: AnyRecord, index: number) => (
-                                <figure
-                                    key={image.id || image.viewUrl || index}
-                                    className={styles.galleryFigure}
-                                >
-                                    <img
-                                        src={image.viewUrl}
-                                        alt={image.title || `${title}, bild ${index + 1}`}
-                                        loading="lazy"
-                                    />
-                                    <figcaption>
-                                        <span className={styles.galleryNumber}>
-                                            {String(index + 1).padStart(2, "0")}
-                                        </span>
-                                        <span>{image.title || title}</span>
-                                    </figcaption>
-                                </figure>
-                            ))}
+                            {images.map(
+                                (image: AnyRecord, index: number) => (
+                                    <figure
+                                        key={
+                                            image.id ||
+                                            image.viewUrl ||
+                                            index
+                                        }
+                                        className={styles.galleryFigure}
+                                    >
+                                        <img
+                                            src={image.viewUrl}
+                                            alt={
+                                                image.title ||
+                                                `${title}, bild ${index + 1}`
+                                            }
+                                            loading="lazy"
+                                        />
+
+                                        <figcaption>
+                                            <span
+                                                className={styles.galleryNumber}
+                                            >
+                                                {String(index + 1).padStart(
+                                                    2,
+                                                    "0"
+                                                )}
+                                            </span>
+
+                                            <span>
+                                                {image.title || title}
+                                            </span>
+                                        </figcaption>
+                                    </figure>
+                                )
+                            )}
                         </div>
                     </div>
                 </section>
             )}
-
-
         </main>
     );
 }

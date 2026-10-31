@@ -13,255 +13,254 @@ type AccordionSection = {
   rows: AccordionRow[];
 };
 
-/* Fält som vi helt vill dölja från accordion (t.ex. dubblerade språkspecifika fält) */
-const IGNORED_KEYS = new Set([
-  "livingAreaDescriptionMultiLang",
-  "plotDescriptionMultiLang",
-  "parkingDescriptionMultiLang",
-  "patioDescriptionMultiLang",
-  "buildingDescriptionMultiLang",
-  "generalInformationMultiLang",
-  "standardPoints",
-]);
+type Deal = Record<string, any>;
 
-/* Översättningar av etiketter / fältnamn */
+/**
+ * Översättningar av fältnamn.
+ */
 const LABELS: Record<string, string> = {
-  id: "ID",
-  shortId: "Objektnummer",
-  objectType: "Objekttyp",
-  objectSubType: "Underkategori",
-  status: "Status",
-  currency: "Valuta",
-  
-  isNewDevelopment: "Nyproduktion",
-
-  customFields: "Övriga uppgifter",
-  marketingTags: "Marknadsföring",
-  viewings: "Visningar",
-  files: "Dokument",
-  urls: "Länkar",
-
-  sellingTexts: "Säljtexter",
-  saleInformation: "Försäljning",
-  location: "Läge",
-  housingAssociation: "Förening",
-  estate: "Bostaden",
-  economy: "Ekonomi",
-  parking: "Parkering",
-  patios: "Uteplatser",
-  patio: "Uteplats",
-  rooms: "Rum & planlösning",
-
-  price: "Pris",
-  priceType: "Prisform",
-  priceDescription: "Prisbeskrivning",
-  earliestAccessDateDescription: "Tillträde",
-
-  streetAddress: "Adress",
-  postalCode: "Postnummer",
-  city: "Ort",
-  municipality: "Kommun",
-  county: "Län",
-  district: "Område",
-  residentialArea: "Bostadsområde",
-
+  objectType: "Bostadstyp",
+  objectSubType: "Typ",
   livingArea: "Boarea",
-  otherLivingArea: "Övrig area",
+  otherLivingArea: "Biarea",
   totalArea: "Totalarea",
   plotArea: "Tomtarea",
-  floor: "Våning",
-  floorsInTotal: "Antal våningar",
   buildYear: "Byggår",
   renovationYear: "Renoveringsår",
   tenureType: "Upplåtelseform",
-  apartmentNumber: "Lägenhetsnummer",
-  governmentApartmentNumber: "Lägenhetsnummer hos Lantmäteriet",
   propertyDesignation: "Fastighetsbeteckning",
-  partOfEstate: "Del av fastighet",
-  freeholdTitle: "Ägandeform",
-  landTenure: "Markägande",
-  isSharedOwnership: "Delat ägande",
-
-  livingAreaAccuracy: "Källa för boarea",
-  plotAreaAccuracy: "Källa för tomtarea",
-  livingAreaDescription: "Beskrivning av boarea",
-  plotDescription: "Tomtbeskrivning",
-  livingAreaIsApproximate: "Boarea är ungefärlig",
-
+  floor: "Våning",
+  floorsInTotal: "Antal våningar",
+  municipality: "Kommun",
+  district: "Område",
+  residentialArea: "Bostadsområde",
   numberOfRooms: "Antal rum",
   numberOfBedrooms: "Antal sovrum",
-  convertNumberOfBedRooms: "Sovrum",
-
-  renovationDescription: "Renoveringar",
-  otherDescription: "Övrig beskrivning",
-  otherBuildingsDescription: "Övriga byggnader",
-  faultsAndDefectsDescription: "Besiktning / Fel & brister",
-  tvInternetDescription: "TV & Internet",
-  parkingDescription: "Parkering",
-  patioDescription: "Uteplats & trädgård",
-
-  plumbing: "Vatten & Avlopp",
+  description: "Beskrivning",
   construction: "Byggnadssätt",
+  renovationDescription: "Utförda renoveringar",
+  otherBuildingsDescription: "Övriga byggnader",
+  faultsAndDefectsDescription: "Besiktning, fel och brister",
+  otherDescription: "Övrig information",
   heating: "Uppvärmning",
-  electricity: "El & Installationer",
-  chimney: "Skorsten",
+  heatingDescription: "Uppvärmning",
   ventilation: "Ventilation",
-  radon: "Radon",
-
-  // Underobjekt till teknik & byggnad
+  plumbing: "Vatten och avlopp",
   water: "Vatten",
   drain: "Avlopp",
-  subFoundationType: "Undergrund",
-  foundationWallType: "Grundmur",
-  foundationType: "Grund",
-  roofingType: "Tak",
-  guttersType: "Plåtarbete / Hängrännor",
-  facadeType: "Fasad",
-  frameType: "Stomme",
-  windowsType: "Fönster",
-  joistType: "Bjälklag",
-  type: "Typ",
-  condition: "Skick",
-  age: "Ålder",
-  brand: "Märke",
-  stemsCondition: "Ledningar",
-  mainFuse: "Huvudsäkring",
-  electricSafety: "Elsäkerhet",
-  isDetected: "Uppmätt",
-
-  shareInHousingAssociation: "Andel i föreningen",
-  shareInHousingAssociationFee: "Andel av avgift",
-  shareOfHousingAssociationNetDebt: "Andel av föreningens nettoskuld",
-  shareOfHousingAssociationNetDebtDescription: "Beskrivning av nettoskuld",
-
+  electricity: "El",
+  tvInternetDescription: "TV och internet",
+  internetDescription: "Internet",
   operatingCostSum: "Driftkostnad",
   householdElectricity: "Hushållsel",
   insurance: "Försäkring",
-  rent: "Avgift",
-  rentDescription: "Avgiftsbeskrivning",
-  livingCostAnalysis: "Boendekostnadsanalys",
   includedInRent: "Ingår i avgiften",
-  includedInRentDescription: "Vad som ingår",
-
-  name: "Namn",
-  identifier: "Organisationsnummer",
+  includedInRentDescription: "Detta ingår i avgiften",
+  rent: "Månadsavgift",
+  rentDescription: "Information om avgiften",
+  name: "Föreningens namn",
   founded: "Bildad",
-  generalInformation: "Allmän information",
-  buildingDescription: "Byggnadsbeskrivning",
-  heatingDescription: "Uppvärmning",
-  internetDescription: "Internet",
+  generalInformation: "Om föreningen",
   upcomingRenovationsDescription: "Kommande underhåll",
-  legalEntityAcceptable: "Juridisk person",
-  housingAssociationTaxationType: "Föreningstyp",
-  plotOwnership: "Markägande",
-  energyPerformance: "Energiprestanda",
-
-  description: "Beskrivning",
+  shareOfHousingAssociationNetDebt:
+    "Andel av föreningens nettoskuld",
+  shareOfHousingAssociationNetDebtDescription:
+    "Information om föreningens nettoskuld",
   parkingSpaces: "Parkeringsplatser",
-
-  number: "Antal",
-  count: "Antal",
-  value: "Värde",
-  total: "Totalt",
+  parkingDescription: "Parkering",
+  patioDescription: "Uteplats och trädgård",
+  otherBuildings: "Övriga byggnader",
 };
 
-/* Översättning av sektionsnamn */
-const SECTION_NAMES: Record<string, string> = {
-  sellingTexts: "Säljtexter",
-  saleInformation: "Försäljning",
-  location: "Läge",
-  housingAssociation: "Förening",
-  estate: "Bostaden",
-  economy: "Ekonomi",
-  parking: "Parkering",
-  patios: "Uteplatser",
-  patio: "Uteplats",
-  rooms: "Rum & planlösning",
-  customFields: "Övriga uppgifter",
-  marketingTags: "Marknadsföring",
-  viewings: "Visningar",
-  files: "Dokument",
-  urls: "Länkar",
-};
-
-/* Översättningar av engelska värden från Mspecs API */
+/**
+ * Engelska API-värden som ska visas på svenska.
+ */
 const VALUE_TRANSLATIONS: Record<string, string> = {
-  // Status
   ACTIVE: "Till salu",
   FOR_SALE: "Till salu",
   UPCOMING: "Kommande",
   PREPARING: "På gång",
   SOLD: "Såld",
-  RESERVED: "Reserverad",
-  PAUSED: "Pausad",
 
-  // Objekttyper
   HOUSE: "Villa",
   VILLA: "Villa",
   APARTMENT: "Lägenhet",
   CONDOMINIUM: "Bostadsrätt",
   ROW_HOUSE: "Radhus",
   TERRACED_HOUSE: "Radhus",
-  TOWN_HOUSE: "Parhus / Kedjehus",
+  TOWN_HOUSE: "Parhus / kedjehus",
   FARM: "Gård",
   AGRICULTURE: "Lantbruk",
   PLOT: "Tomt",
-  VACANT_LAND: "Tomt / Mark",
+  VACANT_LAND: "Tomt / mark",
   COTTAGE: "Fritidshus",
   SUMMER_HOUSE: "Fritidshus",
-  COMMERCIAL: "Kommersiell",
+  COMMERCIAL: "Kommersiell fastighet",
 
-  // Upplåtelseform / Ägande
   OWNERSHIP: "Äganderätt",
   FREEHOLD: "Friköpt",
   TENANT_RIGHT: "Bostadsrätt",
   SITE_LEASEHOLD: "Tomträtt",
   LEASEHOLD: "Arrende",
 
-  // Källor & övrigt
   LANTMATERIET: "Lantmäteriet",
 
-  // Booleans / Svar
   YES: "Ja",
   NO: "Nej",
   TRUE: "Ja",
   FALSE: "Nej",
 
-  // Övrigt
   SEK: "kr",
   EUR: "EUR",
 };
 
-function labelFor(key: string) {
-  if (LABELS[key]) return LABELS[key];
+/**
+ * Tillåtna fält per sektion.
+ *
+ * Endast dessa fält visas.
+ * Okända och interna Mspecs-fält filtreras bort.
+ */
+const SECTION_CONFIG = [
+  {
+    key: "estate",
+    title: "Bostaden",
+    fields: [
+      "livingArea",
+      "otherLivingArea",
+      "totalArea",
+      "plotArea",
+      "buildYear",
+      "renovationYear",
+      "tenureType",
+      "propertyDesignation",
+      "floor",
+      "floorsInTotal",
+    ],
+  },
+  {
+    key: "rooms",
+    title: "Rum & planlösning",
+    fields: [
+      "numberOfRooms",
+      "numberOfBedrooms",
+      "description",
+    ],
+  },
+  {
+    key: "location",
+    title: "Läge",
+    fields: [
+      "municipality",
+      "district",
+      "residentialArea",
+    ],
+  },
+  {
+    key: "saleInformation",
+    title: "Byggnad & skick",
+    fields: [
+      "construction",
+      "renovationDescription",
+      "otherBuildingsDescription",
+      "faultsAndDefectsDescription",
+      "otherDescription",
+    ],
+  },
+  {
+    key: "economy",
+    title: "Ekonomi & drift",
+    fields: [
+      "operatingCostSum",
+      "householdElectricity",
+      "insurance",
+      "includedInRent",
+      "includedInRentDescription",
+      "rent",
+      "rentDescription",
+    ],
+  },
+  {
+    key: "housingAssociation",
+    title: "Föreningen",
+    fields: [
+      "name",
+      "founded",
+      "generalInformation",
+      "upcomingRenovationsDescription",
+      "heatingDescription",
+      "internetDescription",
+      "shareOfHousingAssociationNetDebt",
+      "shareOfHousingAssociationNetDebtDescription",
+    ],
+  },
+  {
+    key: "parking",
+    title: "Parkering",
+    fields: [
+      "parkingSpaces",
+      "parkingDescription",
+      "description",
+    ],
+  },
+  {
+    key: "patio",
+    title: "Uteplats & trädgård",
+    fields: [
+      "patioDescription",
+      "description",
+    ],
+  },
+  {
+    key: "patios",
+    title: "Uteplats & trädgård",
+    fields: [
+      "patioDescription",
+      "description",
+    ],
+  },
+] as const;
+
+/**
+ * Hämta en begriplig etikett för ett fält.
+ */
+function labelFor(key: string): string {
+  if (LABELS[key]) {
+    return LABELS[key];
+  }
 
   return key
     .replace(/([A-Z])/g, " $1")
-    .replace(/^./, (char) => char.toUpperCase())
-    .replace(/_/g, " ");
+    .replace(/_/g, " ")
+    .replace(/^./, (char) => char.toUpperCase());
 }
 
-function translateValue(val: string): string {
-  const trimmed = val.trim();
-  
-  // Rensa bort "Sv: " prefix om det finns
-  if (trimmed.startsWith("Sv: ")) {
-    return translateValue(trimmed.replace(/^Sv:\s*/, ""));
+/**
+ * Översätt textvärden från API:t.
+ */
+function translateValue(value: string): string {
+  const trimmed = value.trim();
+
+  if (!trimmed) {
+    return "";
   }
 
-  const upper = trimmed.toUpperCase();
-
-  if (VALUE_TRANSLATIONS[upper]) {
-    return VALUE_TRANSLATIONS[upper];
+  // Hantera exempelvis "Sv: Villa".
+  if (/^Sv:\s*/i.test(trimmed)) {
+    return translateValue(trimmed.replace(/^Sv:\s*/i, ""));
   }
 
-  if (VALUE_TRANSLATIONS[trimmed]) {
-    return VALUE_TRANSLATIONS[trimmed];
+  const translated = VALUE_TRANSLATIONS[trimmed.toUpperCase()];
+
+  if (translated) {
+    return translated;
   }
 
   return trimmed;
 }
 
+/**
+ * Formatera enkla värden.
+ */
 function formatPrimitive(value: unknown): string {
   if (value === null || value === undefined) {
     return "";
@@ -282,7 +281,18 @@ function formatPrimitive(value: unknown): string {
   return "";
 }
 
-function formatValue(value: unknown): string {
+/**
+ * Formatera värden från Mspecs.
+ * Stödjer strängar, tal, listor och vanliga objekt.
+ */
+function formatValue(
+  value: unknown,
+  depth = 0
+): string {
+  if (depth > 4 || value === null || value === undefined) {
+    return "";
+  }
+
   const primitive = formatPrimitive(value);
 
   if (primitive) {
@@ -290,170 +300,131 @@ function formatValue(value: unknown): string {
   }
 
   if (Array.isArray(value)) {
-    const values = value
-      .map((item) => formatValue(item))
-      .filter(Boolean);
-
-    return values.join(", ");
+    return value
+      .map((item) => formatValue(item, depth + 1))
+      .filter(Boolean)
+      .join(", ");
   }
 
-  if (typeof value === "object" && value !== null) {
-    const object = value as Record<string, unknown>;
-
-    if ("translation" in object) {
-      return formatValue(object.translation);
-    }
-
-    if ("description" in object) {
-      const description = formatValue(object.description);
-
-      if (description) {
-        return description;
-      }
-    }
-
-    if ("name" in object) {
-      const name = formatValue(object.name);
-
-      if (name) {
-        return name;
-      }
-    }
-
-    if ("value" in object) {
-      const objectValue = formatValue(object.value);
-
-      if (objectValue) {
-        return objectValue;
-      }
-    }
-
-    if ("constant" in object) {
-      const constant = formatValue(object.constant);
-
-      if (constant) {
-        return constant;
-      }
-    }
-
-    const values = Object.entries(object)
-      .map(([key, nestedValue]) => {
-        if (IGNORED_KEYS.has(key)) return "";
-        const formatted = formatValue(nestedValue);
-
-        if (!formatted) return "";
-
-        return `${labelFor(key)}: ${formatted}`;
-      })
-      .filter(Boolean);
-
-    return values.join(" · ");
+  if (typeof value !== "object") {
+    return "";
   }
 
+  const object = value as Record<string, unknown>;
+
+  // Prioritera vanliga översättnings- och värdefält.
+  for (const key of [
+    "translation",
+    "description",
+    "name",
+    "value",
+    "constant",
+  ]) {
+    if (key in object) {
+      const formatted = formatValue(object[key], depth + 1);
+
+      if (formatted) {
+        return formatted;
+      }
+    }
+  }
+
+  // Visa inte godtyckliga objekt eller råa API-fält.
   return "";
 }
 
-function createRows(value: unknown): AccordionRow[] {
-  if (!value || typeof value !== "object") {
+/**
+ * Hämta en sektion och endast de uttryckligen tillåtna fälten.
+ */
+function createFilteredRows(
+  section: unknown,
+  allowedFields: readonly string[]
+): AccordionRow[] {
+  if (!section || typeof section !== "object" || Array.isArray(section)) {
     return [];
   }
 
-  if (Array.isArray(value)) {
-    return value
-      .map((item, index) => {
-        const formatted = formatValue(item);
+  const record = section as Record<string, unknown>;
 
-        if (!formatted) return null;
+  return allowedFields.flatMap((key) => {
+    const formatted = formatValue(record[key]);
 
-        return {
-          label: `Post ${index + 1}`,
-          value: formatted,
-        };
-      })
-      .filter(Boolean) as AccordionRow[];
-  }
+    if (!formatted) {
+      return [];
+    }
 
-  return Object.entries(value as Record<string, unknown>)
-    .map(([key, nestedValue]) => {
-      if (IGNORED_KEYS.has(key)) return null;
-
-      const formatted = formatValue(nestedValue);
-
-      if (!formatted) return null;
-
-      return {
+    return [
+      {
         label: labelFor(key),
         value: formatted,
-      };
-    })
-    .filter(Boolean) as AccordionRow[];
+      },
+    ];
+  });
 }
 
-function createSections(deal: any): AccordionSection[] {
+/**
+ * Bygg accordionens sektioner.
+ */
+function createSections(deal: Deal): AccordionSection[] {
   const sections: AccordionSection[] = [];
 
-  const basicRows = createRows({
-    objectType: deal?.objectType,
-    objectSubType: deal?.objectSubType,
-    status: deal?.status,
-    shortId: deal?.shortId,
+  for (const config of SECTION_CONFIG) {
+    const rows = createFilteredRows(
+      deal?.[config.key],
+      config.fields
+    );
 
-    isNewDevelopment: deal?.isNewDevelopment,
-  });
+    if (!rows.length) {
+      continue;
+    }
 
-  if (basicRows.length) {
-    sections.push({
-      title: "Grunduppgifter",
-      rows: basicRows,
-    });
-  }
+    // Undvik två sektioner med samma rubrik.
+    const existing = sections.find(
+      (section) => section.title === config.title
+    );
 
-  const orderedKeys = [
-    "location",
-    "estate",
-    "rooms",
-    "saleInformation",
-    "economy",
-    "housingAssociation",
-    "parking",
-    "patio",
-    "patios",
-    "viewings",
-    "customFields",
-    "marketingTags",
-    "files",
-    "urls",
-  ];
+    if (existing) {
+      const existingLabels = new Set(
+        existing.rows.map((row) => row.label)
+      );
 
-  for (const key of orderedKeys) {
-    const rows = createRows(deal?.[key]);
+      existing.rows.push(
+        ...rows.filter((row) => !existingLabels.has(row.label))
+      );
 
-    if (!rows.length) continue;
+      continue;
+    }
 
     sections.push({
-      title: SECTION_NAMES[key] || labelFor(key),
+      title: config.title,
       rows,
     });
   }
 
-  return sections;
+  return sections.filter((section) => section.rows.length > 0);
 }
 
+/**
+ * PropertyAccordion
+ */
 export default function PropertyAccordion({
   deal,
 }: {
-  deal: any;
+  deal: Deal;
 }) {
   const sections = createSections(deal);
 
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  if (!sections.length) return null;
+  if (!sections.length) {
+    return null;
+  }
 
   return (
     <div className={styles.accordion}>
       {sections.map((section, index) => {
         const isOpen = openIndex === index;
+        const panelId = `property-accordion-panel-${index}`;
 
         return (
           <div
@@ -465,10 +436,9 @@ export default function PropertyAccordion({
             <button
               type="button"
               className={styles.trigger}
-              onClick={() =>
-                setOpenIndex(isOpen ? null : index)
-              }
+              onClick={() => setOpenIndex(isOpen ? null : index)}
               aria-expanded={isOpen}
+              aria-controls={panelId}
             >
               <span className={styles.number}>
                 {String(index + 1).padStart(2, "0")}
@@ -478,13 +448,17 @@ export default function PropertyAccordion({
                 {section.title}
               </span>
 
-              <span className={styles.icon}>
+              <span className={styles.icon} aria-hidden="true">
                 <span />
                 <span />
               </span>
             </button>
 
-            <div className={styles.content}>
+            <div
+              id={panelId}
+              className={styles.content}
+              hidden={!isOpen}
+            >
               <div className={styles.contentInner}>
                 {section.rows.map((row) => (
                   <div
