@@ -1,26 +1,24 @@
-import Link from "next/link";
 import styles from "./Om-oss.module.css";
 
-export default function OmOssPage() {
+export default function OmOss() {
   return (
     <main className={styles.page}>
-      {/* INTRO */}
-{/*       <section className={styles.hero}>
+      {/* HERO */}
+      <section className={styles.hero} aria-labelledby="about-hero-title">
         <div className={styles.heroInner}>
           <p className={styles.eyebrow}>
             Personligt engagemang · Lokal närvaro
           </p>
 
-          <h1 className={styles.heroTitle}>
+          <h1 id="about-hero-title" className={styles.heroTitle}>
             Mer än
             <br />
             <span>en bostad.</span>
           </h1>
 
           <p className={styles.heroText}>
-            Vi tror att ett hem är mer än väggar och tak.
-            Det är platsen där livet händer, minnen skapas
-            och nya kapitel börjar.
+            Vi tror att ett hem är mer än väggar och tak. Det är platsen där
+            livet händer, minnen skapas och nya kapitel börjar.
           </p>
 
           <a href="#var-berattelse" className={styles.heroLink}>
@@ -32,151 +30,110 @@ export default function OmOssPage() {
         <span className={styles.heroNumber} aria-hidden="true">
           01 / OM OSS
         </span>
-      </section> */}
+      </section>
 
-      {/* BERÄTTELSEN */}
-      <section className={styles.story} id="var-berattelse">
+      {/* VÅR BERÄTTELSE */}
+      <section
+        id="var-berattelse"
+        className={styles.story}
+        aria-labelledby="story-title"
+      >
         <div className={styles.storyLabel}>
-          <p className={styles.eyebrow}>Vilka vi är</p>
+          <span className={styles.sectionNumber}>01</span>
+          <span>Vår berättelse</span>
         </div>
 
         <div className={styles.storyContent}>
-          <h2 className={styles.storyTitle}>
-            Nära människorna.
+          <h2 id="story-title" className={styles.sectionTitle}>
+            Människor först.
             <br />
-            <span>Nära platsen.</span>
+            <span>Alltid.</span>
           </h2>
 
           <div className={styles.storyText}>
             <p>
-              Vi är en personlig mäklarfirma med hjärtat i Åhus
-              och en genuin kärlek till platsen vi kallar hem.
-              Här känner vi områdena, människorna och de små
-              detaljerna som gör varje bostad unik.
+              För oss handlar bostäder om så mycket mer än kvadratmeter,
+              planlösningar och adresser. Det handlar om människor, drömmar
+              och platser där livet får ta form.
             </p>
 
             <p>
-              För oss handlar mäkleri inte bara om att förmedla
-              bostäder. Det handlar om att förstå människors
-              drömmar, skapa förtroende och finnas där genom
-              hela processen – från det första samtalet till
-              nycklarna lämnas över.
+              Vi vill göra bostadsresan personlig, trygg och genomtänkt.
+              Därför lägger vi stor vikt vid att lyssna, förstå dina behov
+              och finnas nära genom hela processen.
             </p>
 
             <p>
-              Med personligt engagemang, lokalkännedom och
-              omsorg om varje detalj vill vi göra din
-              bostadsresa trygg, genomtänkt och minnesvärd.
+              Med engagemang, omtanke och lokal närvaro vill vi skapa
+              långsiktiga relationer – och hjälpa fler att hitta hem.
             </p>
           </div>
         </div>
       </section>
 
       {/* VÅRA VÄRDERINGAR */}
-      <section className={styles.values}>
+      <section className={styles.values} aria-labelledby="values-title">
         <div className={styles.valuesHeader}>
-          <p className={styles.eyebrow}>Det vi tror på</p>
-          <h2 className={styles.valuesTitle}>
-            Ett personligt
+          <p className={styles.eyebrow}>
+            Det som driver oss
+          </p>
+
+          <h2 id="values-title" className={styles.sectionTitle}>
+            Ett personligare
             <br />
-            <span>sätt att göra affärer.</span>
+            <span>arbetssätt.</span>
           </h2>
         </div>
 
         <div className={styles.valuesGrid}>
           <article className={styles.valueCard}>
             <span className={styles.valueNumber}>01</span>
-            <h3>Förtroende</h3>
+            <h3>Personligt</h3>
             <p>
-              En bra bostadsaffär börjar med att du känner dig
-              trygg. Vi tror på ärlig kommunikation, tydlighet
-              och att alltid vara tillgängliga längs vägen.
+              Varje människa och varje bostadsresa är unik. Vi tar oss tid
+              att lyssna och anpassar vårt arbete efter dig.
             </p>
           </article>
 
           <article className={styles.valueCard}>
             <span className={styles.valueNumber}>02</span>
-            <h3>Lokalkännedom</h3>
+            <h3>Engagerat</h3>
             <p>
-              Varje område har sin egen karaktär. Vår närhet
-              till trakten hjälper oss att lyfta fram det som
-              gör just din bostad och dess omgivning speciell.
+              Vi tror på närvaro, tydlig kommunikation och ett genuint
+              engagemang från första mötet till sista detaljen.
             </p>
           </article>
 
           <article className={styles.valueCard}>
             <span className={styles.valueNumber}>03</span>
-            <h3>Omsorg i detaljerna</h3>
+            <h3>Tryggt</h3>
             <p>
-              Från första mötet till presentation och
-              överlämning. Vi lägger omsorg vid detaljerna
-              för att skapa en genomtänkt upplevelse.
+              En bra bostadsaffär bygger på förtroende. Vi arbetar
+              strukturerat och transparent så att du kan känna dig trygg.
             </p>
           </article>
         </div>
       </section>
 
-      {/* VÅRT OMRÅDE */}
-      <section className={styles.local}>
-        <div className={styles.localInner}>
-          <div className={styles.localCopy}>
-            <p className={styles.eyebrow}>En plats att kalla hem</p>
+      {/* AVSLUTNING */}
+      <section className={styles.closing} aria-labelledby="closing-title">
+        <p className={styles.eyebrow}>Ska vi lära känna varandra?</p>
 
-            <h2 className={styles.localTitle}>
-              Förälskade i
-              <br />
-              <span>vår del av Skåne.</span>
-            </h2>
-
-            <p>
-              Från kustens lugn och sandiga stränder till
-              charmiga kvarter och landsbygdens öppna vyer.
-              Åhus och omnejd bjuder på en särskild livskvalitet
-              som vi gärna hjälper fler att upptäcka.
-            </p>
-
-            <p>
-              Oavsett om du söker ditt första hem, drömmer om
-              ett hus vid kusten eller funderar på att sälja,
-              möter vi dig där du är.
-            </p>
-
-            <Link href="/fastigheter" className={styles.textLink}>
-              <span>Upptäck våra bostäder</span>
-              <span aria-hidden="true">↗</span>
-            </Link>
-          </div>
-
-          <div className={styles.localArt} aria-hidden="true">
-            <img
-              src="images/profile.jpg"
-              alt="Peter Olvsborn, fastighetsmäklare i Åhus"
-              className={styles.peterImage}
-              loading="lazy"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* KONTAKT */}
-      <section className={styles.closing}>
-        <p className={styles.eyebrow}>Vi ser fram emot att träffa dig</p>
-
-        <h2>
-          Allt börjar
+        <h2 id="closing-title" className={styles.closingTitle}>
+          Nästa kapitel
           <br />
-          med <span>ett samtal.</span>
+          <span>börjar här.</span>
         </h2>
 
         <p className={styles.closingText}>
-          Berätta om dina tankar och planer. Vi hjälper dig
-          gärna att ta nästa steg, oavsett var du befinner dig
-          på din bostadsresa.
+          Oavsett om du funderar på att köpa, sälja eller bara vill prata
+          bostad är du varmt välkommen att höra av dig.
         </p>
 
-        <Link href="/kontakt" className={styles.contactButton}>
-          Kontakta oss
-        </Link>
+        <a href="/kontakt" className={styles.heroLink}>
+          <span>Kontakta oss</span>
+          <span aria-hidden="true">↗</span>
+        </a>
       </section>
     </main>
   );

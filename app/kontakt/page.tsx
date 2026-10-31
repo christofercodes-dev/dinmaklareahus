@@ -53,8 +53,21 @@ export default function KontaktPage() {
             <div className={styles.contactDetails}>
               <div className={styles.detailItem}>
                 <span className={styles.detailLabel}>Telefon</span>
-                <a href="tel:+46 708 24 04 72">
-                  +46 708 24 04 72
+
+                <a className={styles.detailLink} href="tel:+46 708 24 04 72">
+ 
+
+                  <span className={styles.detailNumber}>+46 708 24 04 72</span>
+                </a>
+              </div>
+
+              <div className={styles.detailItem}>
+                <span className={styles.detailLabel}>E-post</span>
+
+                <a className={styles.detailLink} href="peter@dinmaklareahus.se">
+                  
+
+                  <span className={styles.detailNumber}>peter@dinmaklareahus.se</span>
                 </a>
               </div>
 

@@ -16,7 +16,7 @@ export default function Valuation() {
             hem för nästa ägare.
         </p>
 
-        <Link href="/#kontakt" className={styles.button}>
+        <Link href="/kontakt" className={styles.button}>
             <span>Boka fri värdering</span>
         </Link>
     </div>

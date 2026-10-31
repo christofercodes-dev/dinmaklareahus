@@ -53,7 +53,7 @@ export default function UniqueHome() {
               </p>
             </div>
 
-            <Link href="#kontakt" className={styles.button}>
+            <Link href="/kontakt" className={styles.button}>
               <span>Boka kostnadsfri värdering</span>
             </Link>
           </div>
